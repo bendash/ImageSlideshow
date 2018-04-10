@@ -76,7 +76,7 @@ open class FullScreenSlideshowViewController: UIViewController {
         }
     }
     
-    func close() {
+    @objc func close() {
         // if pageSelected closure set, send call it with current page
         if let pageSelected = pageSelected {
             pageSelected(slideshow.scrollViewPage)

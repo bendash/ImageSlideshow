@@ -46,7 +46,7 @@ open class ZoomAnimatedTransitioningDelegate: NSObject, UIViewControllerTransiti
         UIApplication.shared.keyWindow?.addGestureRecognizer(gestureRecognizer)
     }
     
-    func handleSwipe(_ gesture: UIPanGestureRecognizer) {
+    @objc func handleSwipe(_ gesture: UIPanGestureRecognizer) {
         let percent = min(max(fabs(gesture.translation(in: gesture.view!).y) / 200.0, 0.0), 1.0)
         
         if gesture.state == .began {

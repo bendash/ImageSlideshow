@@ -102,6 +102,7 @@ open class ImageSlideshow: UIView, UIScrollViewDelegate {
     }
     // font to use for captions
     open var captionFont: UIFont?
+    open var captionColor: UIColor?
     
     fileprivate var slideshowTimer: Timer?
     fileprivate var scrollViewImages = [InputSource]()
@@ -184,9 +185,8 @@ open class ImageSlideshow: UIView, UIScrollViewDelegate {
         var i = 0
         for image in scrollViewImages {
             let item = ImageSlideshowItem(image: image, zoomEnabled: zoomEnabled, captionEnabled: captionEnabled)
-            if let captionFont = self.captionFont {
-                item.captionLabel.font = captionFont
-            }
+            item.captionLabel.font = captionFont ?? item.captionLabel.font
+            item.captionLabel.textColor = captionColor ?? item.captionLabel.textColor
             item.imageView.contentMode = self.contentScaleMode
             slideshowItems.append(item)
             scrollView.addSubview(item)
@@ -253,7 +253,7 @@ open class ImageSlideshow: UIView, UIScrollViewDelegate {
         }
     }
     
-    func slideshowTick(_ timer: Timer) {
+    @objc func slideshowTick(_ timer: Timer) {
         
         let page = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
         var nextPage = page + 1

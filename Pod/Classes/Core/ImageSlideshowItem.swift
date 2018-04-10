@@ -68,7 +68,7 @@ open class ImageSlideshowItem: UIScrollView, UIScrollViewDelegate {
         var captionLabelFrame = CGRect.zero
         
         if captionEnabled && image.caption != nil {
-            let captionLabelHeight = (image.caption! as NSString).boundingRect(with: CGSize(width: frame.size.width-32, height: 0), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: captionLabel.font], context: nil).size.height+8
+            let captionLabelHeight = (image.caption! as NSString).boundingRect(with: CGSize(width: frame.size.width-32, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: captionLabel.font], context: nil).size.height+8
             imageViewSize = CGSize(width: imageViewSize.width, height: imageViewSize.height-captionLabelHeight)
             captionLabelFrame = CGRect(x: 8, y: imageViewSize.height, width: frame.size.width-32, height: captionLabelHeight)
         }
@@ -109,7 +109,7 @@ open class ImageSlideshowItem: UIScrollView, UIScrollViewDelegate {
         self.setZoomScale(minimumZoomScale, animated: false)
     }
     
-    func tapZoom() {
+    @objc func tapZoom() {
         if isZoomed() {
             self.setZoomScale(minimumZoomScale, animated: true)
         } else {
